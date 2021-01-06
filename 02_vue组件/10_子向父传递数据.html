@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <father></father>
+</div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+        <button @click="fn">/DIANJI WO </button>
+        <p>{{msg}}</p>
+        <son v-if="isShow" @myfn="fatherfn" ref="one"></son>
+    </div>
+</template>
+<template id="son">
+    <div>
+        <input type="text" v-model="msg" @input="sonfn">
+        <button @click="sonfn">点击子组件中的模板</button>
+        <p>{{msg}}</p>
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component("father", {
+        template: "#father",
+        data: function () {
+            return {
+                msg: "我是全局父组件的数据",
+                isShow:true
+            }
+        },
+        methods: {
+            fatherfn:function(data){
+                // alert("父组件方法被执行了")
+                this.msg = data
+            },
+            fn:function(){
+                // this.isShow = !this.isShow
+                console.log(this.$refs.one)
+                console.log(this.$refs.one.msg)
+                this.$destroy('son')
+            }
+        },
+        components: {
+            "son": {
+                template: "#son",
+                data: function () {
+                    return {
+                        msg: "我是全具子组件的数据"
+                    }
+                },
+                methods: {
+                      sonfn:function(){
+                          this.$emit("myfn",this.msg)
+                      }
+                },
+            }
+        }
+    })
+    new Vue({
+        el:"#app",
+
+    })
+</script>

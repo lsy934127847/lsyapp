@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <!-- 文本插值 {{表达式}} -->
+        <p>{{name}}</p>
+       <!--v-text 不解析html标签  -->
+       <p v-text="name">你是是啊</p>
+       <!-- v-html 解析html标签 -->
+       <p v-html="str">你是是啊</p> 
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+        var vm = new Vue({
+            el:'div',
+            data:{
+               name:"啦使用",
+               str:"<script>console.log('123')<\/script>"
+            },
+            methods:{
+        
+            }
+        })
+        
+</script>
+

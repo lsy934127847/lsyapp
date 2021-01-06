@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{$store.state.storemsg}}</p>
+        <p>{{msg}}</p>
+
+     
+        <!-- $refs 属性存在于组件实例对象中 -->
+        <!-- 必须要在子组件上给ref属性指定一个名称，否则在根实例上拿到的是空对象-->
+      <!-- 可通过 根实例.$refs.myone 来访问子组件对象 -->
+        <father ref = 'myone'></father>
+        <global-father ref = 'mytwo'></global-father>
+        <button @click="appfnAdd">点击加</button>
+        <button @click="appfnSub">点击减</button>
+        <input type="text" v-model="$store.state.count">
+        
+    </div>
+</body>
+</html>
+<template id="father">
+    <div>
+        <p>{{fathermsg}}</p>
+        <p>{{$store.state.storemsg}}</p>
+        <button @click="fatherfnAdd">点击加</button>
+        <button @click="fatherfnSub">点击减</button>
+        <input type="text" v-model="$store.state.count">
+      
+    </div>
+</template>
+<template id="father-g">
+        <div>
+            <p>{{globalmsg}}</p>
+            <p>{{$store.state.storemsg}}</p>
+            <button @click="globalfnAdd">点击加</button>
+            <button @click="globalfnSub">点击减</button>
+            <input type="text" v-model="$store.state.count">
+          
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./vuex.js"></script>
+<script>
+      var store = new Vuex.Store({
+
+    //    state 属性:专门用于保存 共享数据 的
+        state:{
+            storemsg :'我是共享数据',
+            count:0,
+            msg:''
+        },
+        // mutations:用于保存修改共享数据的方法
+        mutations:{
+            mAdd(state,payload){
+                console.log('mAdd',this)
+                console.log(this.state===state)
+                
+                state.count ++
+                state.storemsg = payload
+                state.msg = this.getters.change
+                console.log(state.msg)
+            },
+            mSub(state){
+                console.log('mSub',this)
+                state.count ++
+                state.storemsg = payload
+              
+                }
+               
+        },
+        getters:{
+            change(state){
+            //    var str =  state.storemsg+state.count
+
+                // console.log(str)
+                console.log(this) 
+                console.log(this.state === state)
+            console.log('数据改变了')
+            console.log(state.count)
+                return  'str'
+           
+            }
+        }
+    })
+
+    Vue.component('globalFather',{
+        template:'#father-g',
+        data:function(){
+            return {
+                globalmsg:'我是自定义全局组件中的数据'
+            }
+        },
+        methods:{
+            globalfnAdd(){
+                // this.$store.state.count++
+                this.$store.commit('mAdd',this.globalmsg);
+            },
+            globalfnSub(){
+                // this.$store.state.count--
+                this.$store.commit('mSub');
+            },
+        }
+    })
+    var vm = new Vue({
+        el:"#app",
+
+//  store属性:专门用于保存vuex实例对象
+//  在添加此属性后,在vue实例中会返回一个 $store属性：属性值就是vuex.store实例对象
+//  可以通过vm.$store.state.msg 访问vuex实例中的数据
+//  vuex实例与vue实例有个区别:
+//  访问数据 Vuex.Store实例.state.msg    Vue实例.msg
+//  只要在vue根实例添加了此属性,其根组件及其所有子组件都能访问vuex中的共享数据
+//  只要在vue根实例中添加了store属性,在子组件对象中也自动出现$store 属性
+//  
+        store:store,
+        data:{
+            msg:'我是跟实例'
+        },
+        methods:{
+                    fn:function(){
+                        console.log(this.$refs)
+                    },
+                    appfnAdd(){
+                // this.$store.state.count++
+                this.$store.commit('mAdd');
+            },
+            appfnSub(){
+                // this.$store.state.count--
+                this.$store.commit('mSub');
+            },
+                    
+                },
+        components:{
+            'father':{
+                template:'#father',
+                data:function(){
+                    return {
+                        fathermsg:'我是爸爸数据'
+                    }
+                },
+                methods:{
+                    fatherfn:function(){
+                        console.log(this)
+                    },
+                    fatherfnAdd(){
+                // this.$store.state.count++
+                this.$store.commit('mAdd');
+            },
+            fatherfnSub(){
+                // this.$store.state.count--
+                this.$store.commit('mSub');
+            },
+                }
+            }
+        }
+
+    })
+
+
+    console.log(vm)
+    console.log(vm.$refs.myone.fathermsg)
+    console.log(vm.$refs)
+    console.log(vm.$store)
+
+ 
+    console.log(store)
+
+    // 访问 store中的state中的count数据
+    console.log(store.state.count)
+    
+</script>

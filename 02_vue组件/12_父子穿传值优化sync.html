@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <!-- 将爸爸中传递的参数自动赋值给爷爷中的变量msg -->
+        <!-- <father @myfn="msg=$event"></father> -->
+
+        <!-- 爷爷模板中爸爸组件上 自定义属性mymsg， 
+              -->
+        <!-- 儿子组件对象中 this.$emit("update:mymsg",this.msg) 接收 -->
+        <!-- 注意点：暴漏的自定义属性要和接收的名称保持一致，不要忘记写 update-->
+        <!-- 自动将传递的参数赋值给了自定义属性 的值，这个值通常是爷爷中的数据 -->
+        <father :mymsg.sync="msg"></father>
+
+    </div>
+</body>
+</html>
+<template id="father">
+    <div>
+        <!-- <p>{{fathermsg}}</p> -->
+        <button @click="fatherfn">点击爸爸中按钮</button>
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component("father",{
+        template:"#father",
+        data:function(){
+            return  {msg:"我是爸爸中数据",}
+        },
+        props:{
+            mymsg:String
+            },
+        methods:{
+            fatherfn:function(){
+                // alert("我是爸爸中的方法")
+                this.$emit("update:mymsg",this.msg)
+            }
+        }
+    })
+   let vm = new Vue({
+       el:"#app",
+       data:{
+           msg:"我是vue实例中的数据"
+       },
+       methods:{
+           grandpa:function(data){
+            //    alert("我是爷爷中的方法")
+            // this.msg = data
+           }
+       }
+   })
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">点击我</button>
+        <!-- 在生成实例对象后 -->
+        <!-- $refs 属性存在于组件实例对象中 -->
+        <!-- $refs 的属性值 是一个对象，对象中的内容是 dom对象或者组件实例对象，
+        如果ref 属性设置在了原生标签上 那就是dom对象，如果ref设置在了组件上，那就是组件实例对象 -->
+        <p ref="myp">我是p标签</p>
+        <myone ref="myone"></myone>
+    </div>
+</body>
+</html>
+<template id="myone">
+    <div>
+        <p>{{msg}}</p>
+        <p>{{this.msg}}</p>
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            msg:"我哦是app"
+        },
+        methods:{
+            fn:function(){
+                // alert("111")
+                console.dir(document.querySelector('p'))
+                console.log(document.querySelector('#myone'))
+                console.log(this)
+                console.log(this.$refs)
+            // 拿到原生dom对象
+                console.log(this.$refs.myp)
+                console.log(this.$refs.myp.innerHTML)
+                // 拿到自定义组件实例对象
+                console.log(this.$refs.myone)
+                 // 拿到自定义组件实例对象的数据
+                console.log(this.$refs.myone.msg)
+             
+
+            //  拿到接管区域的dom对象
+                console.log(this.$el)
+            }
+        },
+        components:{
+            "myone":{
+                template:"#myone",
+                data:function(){
+                    return {
+                        msg:"我是myone"
+                    }
+                }
+            }
+        }
+    })
+</script>

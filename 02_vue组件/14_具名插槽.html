@@ -1,0 +1,99 @@
+s<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+        <father></father>
+
+    </div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+        <p>{{msg}}</p>
+        <button @click="fatherfn">点击爸爸中按钮</button>
+        <son>
+            <!-- <div slot = "one">我是追加内容一</div>  
+            <div slot="two">我是追加内容二</div>   -->
+            <!-- <div>我是追加内容三</div>     -->
+            <!-- <template v-slot:one>
+                <div>我师v-slot追加的内容</div>
+            </template> -->
+            <template #one>
+                <div>我师v-slot追加的内容</div>
+            </template>
+        </son>
+    </div>
+</template>
+<template id="son">
+        <div>
+            <p>{{msg}}</p>
+            <!-- 匿名插槽 ：没有指定name属性的slot标签为匿名插槽 ，在该组件中追加的内容都将替换该组件模板中 slot 标签的位置 -->
+            <!-- 特点：若在组件模板中添加了多个匿名插槽，则在该组件中添加的内容就会被拷贝多份， -->
+            <!--       匿名插槽只能替换   没有  指定 slot属性的内容，-->
+
+           
+            <!-- <slot>我是默认数据</slot> -->
+            <!-- <slot>我是默认数据</slot> -->
+            <!--具名标签 : 指定了name属性slot标签  -->
+            <!--特点：在组建模板中添加了有name属性的 slot标签只能替换 对应的 指定了slot属性的内容，即name属性值和slot属性值保持一致 -->
+
+
+           <!-- v-slot 指令 用在 template 标签中，标签中的内容就是要替换的内容，可以用v-slot：one   来 对应 slot 标签的name属性 ，进行替换 ->
+           <!-- v-slot:one  简写  #one -->
+            <slot name="one"></slot>
+            <slot name="two"></slot>
+            <button @click="fatherfn">点击儿子中按钮</button>
+          
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component("father", {
+        template: "#father",
+        data: function () {
+            return { msg: "我是爸爸中数据", }
+        },
+        methods: {
+            fatherfn: function () {
+                alert("我是爸爸中的方法")
+            }
+        },
+        components: {"son":{
+            template: "#son",
+            data: function () {
+                return { msg: "我是son中数据", }
+            },
+            methods: {
+                fatherfn: function () {
+                    alert("我是son中的方法")
+                }
+            },
+        }
+         
+        }
+    })
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我是vue实例中的数据"
+        },
+        methods: {
+            grandpa: function (data) {
+                alert("我是爷爷中的方法")
+
+            }
+        }
+    })
+</script>

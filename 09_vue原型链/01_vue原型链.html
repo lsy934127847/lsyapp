@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <father></father>
+        <global></global>
+    </div>
+</body>
+<template id="father">
+    <div>
+            <son></son>
+        <p>我是father</p>
+        <button @click="fatherfn">点击father按钮</button>
+    </div>
+</template>
+
+<template id="son">
+    <div>
+        <p>我是sonr</p>
+        <button @click="sonfn">点击son按钮</button>
+    </div>
+</template>
+
+<template id="global">
+        <div>
+            <p>我是global</p>
+            <button @click="globalfn">点击global按钮</button>
+        </div>
+    </template>
+
+</html>
+<script src="./vue.js"></script>
+<script>
+
+   Vue.component('global',{
+    template: '#global',
+    methods: {
+        globalfn() {
+                console.log(this)
+                console.log(this.sayHi)
+                console.log(this.vm)
+                console.log(this instanceof Vue)
+            }
+        },
+   })
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '我是根实例'
+        },
+        methods: {
+            fatherfn() {
+                console.log(this)
+                console.log(this.sayHi)
+                console.log(this.vm)
+                
+            }
+        },
+        components: {
+            father: {
+                template: '#father',
+                data() {
+                    return {
+                        fathermsg: '我是father组件'
+                    }
+                },
+                methods: {
+                    fatherfn() {
+                        console.log(this)
+
+                        console.log(this.msg)
+
+                        console.log(this.sayHi)
+
+                        console.log(this.vm)
+
+
+                        console.log(this instanceof Vue)
+
+                    }
+                },
+                components: {
+                    son: {
+                        template: '#son',
+                        data() {
+                            return {
+                                fathermsg: 'son'
+                            }
+                        },
+                        methods: {
+                            sonfn() {
+                                console.log(this)
+
+                                console.log(this.msg)
+
+                                console.log(this.sayHi)
+
+                                console.log(this.vm)
+
+
+                                console.log(this instanceof Vue)
+
+                            }
+                        },
+                    }
+                }
+            }
+
+
+        }
+
+    })
+
+    Vue.prototype.sayHi = {
+        data: '我是原型对象'
+    }
+
+    console.log(vm)
+    console.log(Vue.prototype)
+    console.log(vm.__proto__)
+
+    // 1.Vue 实例对象
+    // 2.VueComponent 子组件实例对象
+
+    // 结论 Vue 的原型对象 出现在了     VueComponent 子组件实例对象 的原型连上
+</script>

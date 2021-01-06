@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg.age">
+        <input type="text" v-model="a">
+        <h1>{{cMsg}}</h1>
+    
+        <h1>{{a}}</h1>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:{age:25},
+            // msg:'ni',
+            a:12
+        },
+        computed:{
+           cMsg:function(){
+                console.log('computed的函数被执行了')
+               return this.msg.age
+           }
+        },
+        // mounted () {
+        //      this.msg.age='我式被修改后的年龄'
+        // },
+        watch:{
+            cMsg(){
+                console.log('watch函数里的函数被执行了')
+                this.a++
+            }
+        }
+    })
+
+    // 计算属性:依赖于在data中声明的变量,(此变量在函数中有使用)
+    //          通过设置返回值指定计算属性的值
+    //          当其依赖的变量发生改变时,会重新执行计算属性的函数
+    //           可以监听基本数据类型和复杂数据数据类型
+    //           (复杂数据类型的某个属性的改变也可以监听到)
+    // watch属性:可以监听data中的声明式变量,也可以监听计算属性
+    //            可以监听基本数据类型的变化,但无法监听到对象中某个属性的变话
+                // 可以进行深复制（深拷贝）来监听,实质上是变量的引用地址改变
+                // 在vue中,可以利用JSON进行深复制
+                // this.obj = JSON.parse(JSON.stringify(obj))
+</script>

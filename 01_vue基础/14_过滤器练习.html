@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{time | dateFormart}}</p>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 自定义全局过滤器
+    
+    // Vue.filter("myfilter",function(value){
+    //     console.log(value)
+    //     value = value.replace(/爸爸/g,"**")
+    //     console.log(value)
+    //     return value
+    // })
+    // Vue.filter("myfilter_02",function(value){
+    //     console.log(value)
+    //     value = value.replace(/\*\*/g,"爷爷")
+    //     console.log(value)
+    //     return value
+    // })
+
+    // 利用过滤器格式化日期
+    Vue.filter("dateFormart",function(value){
+    var date = new Date(value)
+    var year = date.getFullYear()+""
+    var month = date.getMonth()+1+""
+    var day = date.getDate()+""
+    var hour = date.getHours()+""
+    var minute = date.getMinutes()+""
+    var second = date.getSeconds()+""
+    // 字符串.padStart(位数,"0") 判断一个字符串的长度是否满足指定长度，不满足，在字符串之前补充指定字符让其满足，并返回
+    return `${year.padStart(2,"0")}--${month.padStart(2,"0")}--${day.padStart(2,"0")} ${hour.padStart(2,"0")}:${minute.padStart(2,"0")}:${second.padStart(2,"0")}`
+})
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: "我是爸爸卡死的回复的爸爸数据的哈爸爸",
+                time: Date.now()
+
+            },
+            methods: {
+
+            },
+            // 专门用于定义局部过滤器
+            // 局部过滤器只能在特定的vue控制区域使用
+            filters: {
+                "myfilter": function (value) {
+                    value = value.replace(/爸爸/g, "**")
+                    return value
+                },
+                "myfilter_02": function (value) {
+                    value = value.replace(/\*\*/g, "爷爷")
+                    return value
+                }
+            }
+        })
+
+</script>
+<script>
+    var str = "123"
+    console.log(str.padStart("8","abc"))
+</script>

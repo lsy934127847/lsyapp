@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       .box{
+           width:400px;
+           height:200px;
+           background: red;
+           margin:20px;
+       }
+       /* 过渡动画 将一个元素 两种情况 第一中 显示  即 display:block或者添加了dom节点 分为三个状态 进入之前  进入过程中  进入之后 */  
+           
+                  /* 第二种  隐藏  即display:none或者移除dom节点 就可触发  隐藏分为三个状态  离开之前 离开过程中  离开之后 */
+    /* 显示 进入之前 */
+
+    /* 注意点 :过度动画配合v-show和v-if配合使用，transition标签中可添加一个appear属性 让其已进入页面就执行过渡效果*/
+    /*   一个 */
+     .v-enter{
+          opacity: 0;
+          width: 100px;
+          height: 100px;
+     }
+     /* 显示 进入之后 */
+     .v-enter-to{
+        opacity: 1; 
+        width: 400px;
+          height: 400px;
+     }
+       /* 显示 进入过程中 */
+     .v-enter-active{
+         transition: all 2s
+     }
+     /* 隐藏 离开之前 */
+     .v-leave{
+        opacity: 1;
+     }
+      /* 隐藏 离开之后 */
+     .v-leave-to{
+        opacity: 0;
+     }
+        /* 隐藏 离开过程中 */
+     .v-leave-active{
+         transition: all 2s
+     }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="isShow=!isShow">根模板中的按钮</button>
+        <transition appear >
+            <div  v-if="isShow" class="box" key="1">我是11111</div>
+            <div  v-else class="box" key="2">我是22222</div>
+        </transition>
+        <!-- <transition appear>
+            <div  v-show="isShow" class="box">我是</div>
+        </transition> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{  
+            isShow:true
+        },
+        methods:{
+            // fn:function(){
+            //     // document.getElementsByClassName('box')[0].style = "display:none"
+            //     document.getElementsByClassName('box')[0].remove()
+            // }
+        }
+    })
+</script>
+</body>
+</html>

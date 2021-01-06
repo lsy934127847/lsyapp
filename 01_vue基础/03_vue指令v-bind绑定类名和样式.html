@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       .size{
+             font-size: 40px;
+       }
+       .color{
+           color:blue;
+       }
+       .background{
+           background: aqua;
+       }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定类名方式一 : -->
+        <!-- <p :class="color+' '+background+' '+size">{{name}}</p> -->
+         <!-- 绑定类名方式二 : -->
+         <!-- <p :class="['color','size','background']">{{name}}</p> -->
+          <!-- 绑定类名方式三 : -->
+          <!-- <p :class="{color:true,size:true,background:true}">{{name}}</p> -->
+
+          <!-- 绑定样式方式一 : -->
+          <!-- <p :style="{color:'red','font-size':'60px',background:'pink'}">{{name}}</p> -->
+           <!-- 绑定样式方式一 : -->
+           <!-- <p :style="[{background:'red','color':pink},{'font-size':'100px'}]">{{name}}</p> -->
+     
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+      var vm = new Vue({
+       el:'#app',
+       data:{
+         name:'剌世勇',
+         color:'red',
+         background:'blue',
+         fontSize:'60px'
+       }
+   })
+console.log(vm)
+</script>
+<script>
+    var arr = ['color','size','background']
+ console.log(arr.join(" "))
+</script>

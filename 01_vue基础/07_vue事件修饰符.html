@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      div>li{
+          width:200px;
+          height: 200px;
+          background: aqua;
+      }
+      .gradfather{
+        width:600px;
+          height: 600px;
+          background: aqua;
+      
+      }
+      .father{
+        width:400px;
+          height: 400px;
+          background: red;
+     
+        }
+        .son{
+            width:200px;
+          height: 200px;
+          background: green;
+ 
+        }
+        div>ul{
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div>
+         <!-- // .prevent阻止默认动作 -->
+          
+          <!-- // 阻止a标签跳转 -->
+     
+            <a href="" @click.prevent="fn">点击我</a>
+            <a href="" @click.prevent>点击我</a>
+                <!-- // 阻止右击出现菜单栏  -->
+            <li @click.right.prevent></li>
+            <!-- 阻止form表单提交行为 -->
+            <form action="" @submit.prevent>
+                    <input type="text" @keydown.enter.prevent>
+                    <input type="submit" value="点击" @click.prevent>
+            </form>
+    
+           
+        
+           
+    </div>
+       <div id="app">
+            <ul>
+                 <!-- 阻止冒泡 .stop-->
+                    <li class="gradfather" @click="fn">
+                            <ul class="father" @click.stop="bn">
+                                    <li class="son" @click="Cn"></li>
+                            </ul>
+                    </li>
+                 
+                   
+                </ul>
+       </div>
+       <div id="app-01">
+         
+          <!-- .once只触发一次 -->
+          <!-- .left:只当点击鼠标左键时触发 -->
+          <!-- .right:只当点击鼠标右键时触发 -->
+          <!-- .middle:只当点击鼠标中间键时触发 -->
+          <!-- .capture:事件类型为捕获 -->
+          <!-- .self :只有自己是目标元素的时候才触发 -->
+          <button id="btn" @click.left.once="fn">点击我</button>
+          <!-- 事件处理对象 $event-->
+          <button id="btn" @click.left="fn($event)">点击我</button>
+       </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    
+    var vm = new Vue({
+        el:'#app-01',
+        data:{
+
+        },
+        methods:{
+            fn:function(e){
+            //    alert("爷爷被点击了") 
+            console.log("爷爷被点击了")
+            console.log(e)
+            console.log(e.target)
+            console.log(e.pageX)
+            }, 
+            bn:function(){
+            //    alert("爸爸被点击了") 
+            console.log("爸爸被点击了")
+            },
+            Cn:function(){
+            //    alert("儿子被点击了")
+            console.log("儿子被点击了") 
+            } 
+        }
+    })
+   
+</script>

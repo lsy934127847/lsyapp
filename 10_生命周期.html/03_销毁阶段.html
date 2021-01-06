@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">切换</button>
+        <father v-if="isShow"></father>
+    </div>
+</body>
+<template id="father">
+    <p>我是组件</p>
+</template>
+</html>
+<script src="./vue.js"></script>
+<script>
+    Vue.component('father',{
+        template:'#father',
+        data:function(){
+            return {
+                msg:'222'
+            }
+        },
+        // 组件即将 通过v-if 销毁
+        //建议在 beforeDestroy函数中访问和操作到组件中的数据和方法的函数
+        beforeDestroy(){
+            console.log(this.msg)
+          
+            console.log('组件即将被销毁')
+        },
+        destroyed(){
+            console.log(this.msg)
+            //不要在在 destroyed函数中访问和操作到组件中的数据和方法
+            console.log('组件已经被销毁')
+        }
+    })
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            isShow:true
+        },
+        methods:{
+            fn(){
+                this.isShow = !this.isShow
+            }
+        }
+    })
+</script>

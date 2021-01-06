@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       img{
+           width:200px;
+           height: 200px;
+       }
+    </style>
+</head>
+<body>
+    <div id="app1">
+                   <abc></abc>
+
+    </div>
+    <div id="app2">
+            <def></def>
+
+        </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+      Vue.component("def", {
+        template: ` 
+        <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>全局组件def</p>
+            </div>
+            `
+    })
+    var vm1 = new Vue({
+        el:"#app1",
+        data:{
+
+        },
+        methods:{
+
+        },
+        // 用于自定义局部组件 局部组件只能在注册时组件所在的vue实例中控制的区域使用
+        components:{
+            "abc":{
+                template:`
+            <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>局部组件#app1--abc</p>
+            </div>
+                `
+            }
+        }
+    })
+
+       var vm2 = new Vue({
+        el:"#app2",
+        data:{
+
+        },
+        methods:{
+
+        },
+        
+    })
+</script>

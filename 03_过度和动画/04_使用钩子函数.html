@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 200px;
+            background: red;
+            margin: 20px;
+        }
+
+        /* 过渡动画 将一个元素 两种情况 第一中 显示  即 display:block或者添加了dom节点 分为三个状态 进入之前  进入过程中  进入之后 */
+
+        /* 第二种  隐藏  即display:none或者移除dom节点 就可触发  隐藏分为三个状态  离开之前 离开过程中  离开之后 */
+
+        /* 显示 进入之前 */
+
+        /* 注意点 :过度动画配合v-show和v-if配合使用，transition标签中可添加一个appear属性 让其已进入页面就执行过渡效果*/
+
+        /*  一个transition标签中 只能指定一个元素 ，可以设置name属性  让指定的元素执行动画 */
+
+        /* 执行完成后，类名被移除，所以元素会复位 */
+
+        .one-enter {
+            opacity: 0;
+
+
+        }
+
+        /* 显示 进入之后 */
+
+        .one-enter-to {
+            opacity: 1;
+
+        }
+
+        /* 显示 进入过程中 */
+
+        .one-enter-active {
+            transition: all 2s
+        }
+
+        /* 隐藏 离开之前 */
+
+        .one-leave {
+            opacity: 1;
+        }
+
+        /* 隐藏 离开之后 */
+
+        .one-leave-to {
+            opacity: 0;
+            margin-left: 400px;
+        }
+
+        /* 隐藏 离开过程中 */
+
+        .one-leave-active {
+            transition: all 2s
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="isShow=!isShow">根模板中的按钮</button>
+        <!-- mode="out-in"  先出后进 先执行隐藏过度动画 ，再执行显示过度动画--->
+
+        <!-- mode="in-out"  先进后出  先执行显示过度动画 ，再执行隐藏过度动画-->
+        <!-- 声明钩子函数 ,并声明 v-bind:css="false" 不要去找css类名-->
+        <transition appear v-bind:css="false" v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:after-enter="afterEnter">
+            <div v-if="isShow" class="box" key="1">我是111111</div>
+
+        </transition>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isShow: true
+            },
+            methods: {
+                beforeEnter(el) {
+                    console.log("0")
+                    //  el:要执行动画的元素
+                    el.style.opacity = "0"
+                    el.style.width="400px"
+                },
+                enter(el, done) {
+                    // 执行done函数之后才会执行afterEnter
+                    el.style.transition = "all 3s"
+                    console.log("2")
+                    // 要有动画效果必须写上如下两句中的任意一句
+                    el.offsetHeight;
+                    el.offsetWidth;
+
+                    // 如果添加appear属性之后没有效果
+                    // 则 让done（） 成为异步代码 setTimeout
+                    done()
+                },
+                afterEnter(el) {
+                    el.style.opacity = "1"
+                    el.style.width="800px"
+                    console.log("3")
+                },
+
+            }
+        })
+    </script>
+</body>
+
+</html>

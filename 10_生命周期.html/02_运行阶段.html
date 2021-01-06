@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{vmMsg}}</p>
+    </div>
+</body>
+</html>
+<script src="./vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            vmMsg:'我是根实例中的数据'
+            
+        },
+        created(){
+            // 
+    //         setTimeout(()=>{
+    //             this.vmMsg = '我是在created中修改的数据'
+    // },3000)
+         
+        },
+        mounted(){
+            this.vmMsg = 'mounted'
+        },
+        beforeUpdate(){
+            // 监听data数据的改变,但界面还没有同步
+            console.log('数据改变了beforeUpdate')
+            console.log(document.querySelectorAll('p')[0].innerHTML)
+        },
+        updated(){
+            // data数据的改变且页面同步之后 调用此方法
+            console.log(document.querySelectorAll('p')[0].innerHTML)
+        }
+    })
+    
+    // vm.vmMsg = '我是全局中修改后的数据'
+
+    // setTimeout(function(){
+    //     vm.vmMsg = '我是全局中修改后的数据'
+    // },4000)
+
+    //  创建vue实例之后-初始化事件和生命周期方法-(调用beforeCreate方法)
+    //  -初始化data和methods等-(调用created方法)-拿到和编译模板
+    //  -(调用beforeMount方法)-将编译好的模板渲染到页面-(调用mounted方法)
+    //  (beforeUpdate监听data数据的改变但界面还没有同步)(updated data数据的改变且页面同步之后)
+    // 
+</script>

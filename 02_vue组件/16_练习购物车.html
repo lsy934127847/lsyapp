@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app{
+            width:800px;
+            height: 600px;
+            background: aqua;
+            margin:100px auto;
+        }
+    .father{
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 40px;
+        box-sizing: border-box;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <father>
+            <template v-slot:default="acceptmsg">
+                  <!-- <div v-for="(value) in prolist_01" v-html="value"></div> -->
+                  <!-- <p>{{acceptmsg.mymsg}}</p> -->
+                  <input type="text" v-model="acceptmsg.mymsg">
+            </template>
+        </father>
+        <father>
+                <template v-slot:default="acceptmsg">
+                        <div v-for="(value) in prolist_02" v-html="value"></div>
+                  </template>
+        </father>
+        <father>
+                <template v-slot:default="acceptmsg">
+                        <div v-for="(value) in prolist_03" v-html="value"></div>
+                  </template>
+        </father>
+        <father>
+                <template v-slot:default="acceptmsg">
+                        <div v-for="(value) in prolist_04" v-html="value"></div>
+                  </template>
+        </father>
+    </div>
+</body>
+</html>
+<!-- 需求 1. 实现 不同商品  数量加减  对应各自金额的变化(金额=数量*单价) -->
+<!--      2.    优化需求：计算选中商品的种类数量 以及选中商品的总金额 ，并且实现 动态变化 -->
+<template id="father">
+    <div class="father">
+         tg67
+
+
+
+
+                 
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 定义全局个父组件插槽
+    Vue.component("father",({
+        template:"#father",
+        data:function(){
+            return {
+                fathermsg:"",
+                num:20
+            }
+        },
+        methods:{
+            fatherfn:function(){
+
+            }
+        }
+    }))
+    let vm = new Vue({
+        el:"#app",
+        data:{
+           prolist_01:["商品一","单价:200",`<span>+</span><input type="text" v-model="num"><span>-</span>`,`<span>金额</span><span></span>`],
+           prolist_02:["商品二","单价:300",`<span>+</span><input type="text" v-model="num"><span>-</span>`,`<span>金额</span><span></span>`],
+           prolist_03:["商品三","单价:600",`<span>+</span><input type="text"><span>-</span>`,`<span>金额</span><span></span>`],
+           prolist_04:["商品四","单价:500",`<span>+</span><input type="text"><span>-</span>`,`<span>金额</span><span></span>`],
+        }
+    })
+</script>

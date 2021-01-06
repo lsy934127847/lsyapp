@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+           width:100px;
+           height: 100px;
+           background: aqua;
+       }
+    </style>
+</head>
+<body>
+    <li>
+            <button @click="toggleShow" id="btn1">点击切换显示隐藏</button>
+            <div v-show="flag">{{msg}}</div>
+            <br><br><br>
+
+            <button @click="toggleIf">点击切换显示隐藏</button>
+            <div v-if="num>5">大于5</div>
+            <div v-else-if="num<=2">小于等于2</div>
+            <div v-else>大于2小于等于5</div>
+            <span>{{num}}</span>
+    </li>
+    <ul>
+         
+    </ul>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+   
+    var a = 20
+    var vm = new Vue({
+        el:'li',
+        data:{
+            flag:true,
+            msg:'show',
+            num:20,
+            data:'IF'
+        },
+        methods:{
+            toggleShow:function(){
+                this.flag = !this.flag
+            },
+            // toggleIf:function(){
+            //         //  this.num =parseInt(Math.random()*11) 
+            //         console.log(this)
+            // }
+            toggleIf:()=>{
+                console.log(this)
+            }
+        }
+        
+    })
+
+var oBtn1 = document.getElementById('btn1')
+
+// oBtn1.addEventListener('click',function(){
+//     var toggleIf = ()=>{
+//         console.log(this)
+//     }
+//     toggleIf()
+// })
+var a = 200
+var b
+var arr = {
+    a : 400,
+    fn:function(){
+       var  bn = ()=>{
+        console.log(this.a)
+       }
+       bn()
+    }
+}
+// var fn = ()=>{
+//     console.log(this.a)
+// }
+
+var obj = {
+    a:300,
+    say:function(){
+        arr.fn()  
+    }
+}
+
+obj.say()
+
+
+// var obj = {
+//     fn:()=>{
+//         console.log(this)
+//     }
+// }
+
+
+</script>

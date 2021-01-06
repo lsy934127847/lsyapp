@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 注意点：过滤器只能在插值语法和v-bind中使用 -->
+        <!-- 全局过滤器可以在任何vue控制的区域使用 -->
+        <!-- v-text 和v-html 是指令 -->
+        <p>{{name | myfilter | myfilter_02}}</p>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 自定义全局过滤器
+    Vue.filter("myfilter",function(value){
+        console.log(value)
+        value = value.replace(/爸爸/g,"**")
+        console.log(value)
+        return value
+    })
+    Vue.filter("myfilter_02",function(value){
+        console.log(value)
+        value = value.replace(/\*\*/g,"爷爷")
+        console.log(value)
+        return value
+    })
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            name:"我是爸爸卡死的回复的爸爸数据的哈爸爸",
+
+        },
+        methods:{
+
+        }
+    })
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <style>
+       .box{
+           width:400px;
+           height:200px;
+           background: red;
+           margin:20px;
+       }
+   /* Animate  网址 效果 animate.style */
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="isShow=!isShow">根模板中的按钮</button>
+        <transition mode="out-in"enter-active-class="animated hinge 
+           "leave-active-class="animated zoomOut" >
+            <div  v-if="isShow" class="box" key="1">我是11111</div>
+            <div  v-else class="box" key="2">我是22222</div>
+        </transition>
+      
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{  
+            isShow:true
+        },
+        methods:{
+            // fn:function(){
+            //     // document.getElementsByClassName('box')[0].style = "display:none"
+            //     document.getElementsByClassName('box')[0].remove()
+            // }
+        }
+    })
+</script>
+</body>
+</html>

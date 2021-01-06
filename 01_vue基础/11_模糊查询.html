@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //    var vm = new Vue({
+    //         el:"#box",
+    //         data:{
+    //             mytext:"",
+    //             list:["计算机","扬声器","收音机","收银机","键盘",
+    //             "鼠标","计算器","收纳盒","盘子","标尺","鼠标垫","光盘","收纳箱","声卡",
+    //             "变声器","录音机"]
+    //         },
+    //         computed:{
+    //             resultList(){
+    //                 // 里面的this就是当前的vue实例
+    //                 // 如果输入的内容this.mytext为空,就不要展示内容
+    //                 if(this.mytext===""){
+    //                     return []
+    //                 }
+    //                 return this.list.filter(item=>item.indexOf(this.mytext)>-1)
+    //             }
+    //         }
+    //     })
+
+</script>
+<script>
+    var arr = []
+    console.log(arr.__proto__.constructor.name === 'Array')
+    var obj = {}
+    console.log(obj.__proto__.constructor.name === 'Object')
+
+    // 只要 Array构造函数的原型对象出现在了 arr的原型链上，就会判断为true
+    console.log(arr instanceof Array)
+</script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p ref = 'p1'>{{msg}}</p>
+        <!-- <p>{{grandpamsg}}</p> -->
+        <father ref="father"></father>
+        <button @click="grandpa">点击爷爷按钮</button>
+        <button @click="grandpa01">点击爷爷按钮</button>
+    </div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+            <p ref = 'p1'>{{fathermsg}}</p>
+            <son ref="son"></son>
+    </div>
+
+  
+</template>
+<template id="son">
+    <div>
+            <p>{{sonmsg}}</p>
+    </div>
+
+</template>
+<!-- 需求 父组件使用或触发子组件的方法 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我是爷爷中的数据",
+            // grandpamsg:this.$refs.father.$refs.son.sonmsg,
+            // this 指向window
+            arr:this
+        },
+        methods: {
+            grandpa: function () {
+                alert("我是爷爷中的方法")
+            //    this.grandpamsg =  this.$refs.father.$refs.son.sonmsg
+            
+
+            },
+            grandpa01:function(){
+
+                // 拿到了儿子的方法直接执行即可
+                console.log(this.$refs)
+                this.$refs.father.$refs.son.sonfn()
+            }
+        },
+        // component：组件   template：模板
+        components: {
+            "father": {
+                template: "#father",
+                data: function () {
+                    return {
+                        fathermsg: "我是爸爸中的数据"
+                    }
+                },
+                methods: {
+                    fatherfn: function () {
+                        alert("我是爸爸中的方法")
+                    }
+                },
+                components: {
+                    "son": {
+                        template: "#son",
+                        data: function () {
+                            return {
+                                sonmsg: "我是儿子中的数据"
+                            }
+                        },
+                        methods: {
+                            sonfn: function () {
+                                alert("我是儿子中的方法")
+                            }
+                        }
+                    }
+                }
+            },
+
+        }
+    })
+    // 拿到儿子的数据
+    console.log(vm.$refs.father.$refs.son.sonfn)
+
+    console.log(vm)
+
+
+
+// this 存在于函数作用域中
+    var obj = {
+        a:this
+    }
+    console.log(obj.a)
+</script>

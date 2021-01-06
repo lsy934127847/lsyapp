@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       /* .on{
+        
+       }
+       #app>div{
+        width:100px;
+           height:100px;
+           background-color: aqua;
+       } */
+       .aaa{
+           list-style: none;
+           width:150px;
+           height:30px;
+           background-color: aqua;
+           margin:20px 0px;
+           cursor: pointer;
+       }
+       .onepage,.twopage{
+           width:200px;
+           height:200px;
+           background-color: blueviolet;
+       }
+    </style>
+</head>
+<body>
+    <div id="app">
+           <!-- <a href="#/one">切换到第一个界面</a>
+           <a href="#/two">切换到第二个界面</a> -->
+
+           <!-- router-link 标签默认渲染为 a 标签 -->
+           <!-- 可以设置 tag 属性 来指定要渲染什么类型的标签 -->
+           <!-- 可以设置 连接激活时添加的类名 但是如何设置默认的类名？ -->
+           <!--  -->
+           <router-link to="/one?name=lsy&age=25" tag="li" active-class="on" class="aaa">切换到第一个界面</router-link>
+           <router-link to="/two/zs/66" tag="li" active-class="on" class="aaa">切换到第二个界面</router-link>
+
+           <router-view name="one"></router-view>
+           <router-view name="default"></router-view>
+         
+    </div>
+    <template id="one">
+        <div class="onepage">
+            <p>我是第一个页面</p>
+        </div>
+    </template>
+    <template id="two">
+            <div class="twopage">
+                <p>我是第二个页面</p>
+            </div>
+        </template>
+</body>
+</html>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    const one = {
+        template:'#one',
+        created:function(){
+            console.log(this)
+            console.log(this.$route.query.age)
+        }
+    }
+    const two = {
+        template:'#two',
+        created:function(){
+            console.log(this)
+            console.log(this.$route.params.name)
+        }
+    }
+
+    // 定义路由规则
+    const routes = [
+        {path:'/one',components:{one:one}},
+        {path:'/two/:name/:age',component:two}
+    ]
+    // 创建路由对象
+    const router = new VueRouter({
+        routes:routes
+    })
+    var vm = new Vue({
+        el:'#app',
+        router:router,
+        data:{
+            msg:'我是根实例'
+        },
+v        //     one:one,
+        //     two:two
+        // }
+    })
+
+    console.log(router)
+     // $router 属性 是路由VueRouter实例对象,常用来 用来 操作路由
+    //  $route 属性是路由信息对象,用来获取路由信息的，
+     console.log(vm.$route.query.age)
+    console.log(vm.$router)
+    console.log(vm.$router === router)
+   
+</script>

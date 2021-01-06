@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+           <p>{{beforeMsg}}</p>
+           <p>{{vmMsg}}</p>
+    </div>
+</body>
+</html>
+<script src="./vue.js"></script>
+<script>
+//   创建期间的生命周期方法
+
+ var vm = new Vue({
+     el:'#app',
+     data:{
+         vmMsg:'我是根实例'
+     },
+     beforeCreate(){
+    //    this 指向当前实例
+         console.log(this)
+        //  无法使用实例中的data和methods等
+        this.beforeMsg = '我是before中添加的属性'
+            console.log('创建之前',this.beforeMsg)
+     },
+     created(){
+        //  最早可以访问data和methods的地方
+        console.log(this)
+        this.createMsg = '我是create中添加的属性'
+            console.log('创建之中',this.createMsg)
+            // 数据双向绑定，和实时更新
+            setTimeout(()=>{
+                this. vmMsg= "我是修改后的数据"
+            },3000)
+           
+     },
+     beforeMount(){
+        // 拿到模板并编译模板之后调用此方法,但还没有将模板渲染到页面
+        // 注意点:模板指实例对象接管的区域,
+        // 假如在这里删除节点等操作,是不起任何作用的
+        // 因为vue 已经拿到模板，最中也会将模板渲染到页面
+         document.querySelectorAll('p')[0].innerHTML = "565465"
+         var a =  document.querySelectorAll('p')[0].innerHTML
+         document.querySelectorAll('p')[0].remove()
+        //  console.log(a)
+     },
+     mounted(){
+        //  将编译好的模板渲染到页面之后 调用此方法
+        var a =  document.querySelectorAll('p')[0].innerHTML
+         console.log(a)
+     }
+ })
+
+//  创建vue实例之后-初始化事件和生命周期方法-(调用beforeCreate方法)
+    //  -初始化data和methods等-(调用created方法)-拿到和编译模板
+    //  -(调用beforeMount方法)-将编译好的模板渲染到页面-(调用mounted方法)
+    //  
+</script>

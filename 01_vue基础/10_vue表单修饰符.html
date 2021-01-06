@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+            <!-- change事件中同步    -->
+        <!-- .lazy 失去焦点同步一次，失去焦点时才将value值同步给text变量 -->
+        <input type="text" v-model.lazy="text">
+        <span>input里面输入的内容是:{{text}}</span>
+
+        <!-- .number 把输入的类型转换为Number类型，如果转换结果为NaN，则不转换，返回原值 -->
+        <input type="text" v-model.lazy.number="text">
+        <span>input里面输入的内容是:{{text}}</span>
+
+        <!-- .trim 去除首尾空格 -->
+        <input type="text" v-model.lazy.trim="msg">
+        <span>input里面输入的内容是:{{msg}}</span>
+    </form>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+          new Vue({
+            el:"form",
+            data:{
+                text:"",
+                msg:"",
+                content:""
+            }
+        })
+</script>

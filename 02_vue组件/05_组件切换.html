@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="fn">我父组件中的按钮</button>
+        <!-- <abc v-if="isShow"></abc> -->
+        <def v-if="isShow"></def>
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component("abc", {
+
+    })
+  var vm =   new Vue({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            fn: function () {
+                this.isShow = !this.isShow
+            }
+        },
+        components: {
+            "def":{
+            template: `
+ <div>
+       <button @click="fn">我是局部组件按钮</button>
+        <p>{{msg}}</p>
+    </div>
+           `,
+            data: function () {
+                return {
+                    msg:"我是全局自定义组件中的数据",num:100
+                }
+            },
+            methods: {
+                fn: function () {
+                     console.log(this)
+                }
+            }
+        }
+        }
+        
+
+    })
+   
+    
+</script>

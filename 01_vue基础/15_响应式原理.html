@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+   class Vue{
+       constructor(options){
+           console.log(options)
+           this.initProxy(options.data)
+       }
+       initProxy(data){
+        //    进行数据劫持,把data里面的内容转发到实例上
+        var arr = Object.keys(data) //['num','price','name']
+        arr.map(v=>{
+            // console.log(v)
+            // console.log(data[v])
+
+            // 对象属性的定义方法一
+            // this[v] = data[v]
+
+             // 对象属性的定义方法二
+            Object.defineProperty(this,v,{
+                get:function(){
+                    return data[v]
+                },
+                set:function(newVal){
+                    data[v] = newVal
+                }
+            })
+        })
+       }
+   }
+
+
+   var vm = new Vue({
+       data:{
+          num:777 ,
+          price:100,
+          name:'lsy'
+       }
+   })
+console.log('vm',vm)
+   var obj = {
+       name:'张三',
+       age:12,
+       score:34
+       
+   }
+//    Object.keys(obj) 返回值对象的键的集合，是一个数组
+  console.log(Object.keys(obj))
+
+
+</script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+        <father></father>
+
+    </div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+        <p>{{msg}}</p>
+        <button @click="fatherfn">点击爸爸中按钮</button>
+        <son>
+            <div>我是追加内容一</div>  
+            <div>我是追加内容二</div>  
+            <div>我是追加内容三</div>    
+        </son>
+    </div>
+</template>
+<template id="son">
+        <div>
+            <p>{{msg}}</p>
+            <!-- 匿名插槽 ：没有指定name属性的slot标签为匿名插槽 ，在该组件中追加的内容都将替换该组件模板中 slot 标签的位置 -->
+            <!-- 特点：若在组件模板中添加了多个匿名插槽，则在该组件中添加的内容就会被拷贝多份， -->
+            <slot>我是默认数据</slot>
+            <slot>我是默认数据</slot>
+            <button @click="fatherfn">点击儿子中按钮</button>
+          
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component("father", {
+        template: "#father",
+        data: function () {
+            return { msg: "我是爸爸中数据", }
+        },
+        methods: {
+            fatherfn: function () {
+                alert("我是爸爸中的方法")
+            }
+        },
+        components: {"son":{
+            template: "#son",
+            data: function () {
+                return { msg: "我是son中数据", }
+            },
+            methods: {
+                fatherfn: function () {
+                    alert("我是son中的方法")
+                }
+            },
+        }
+         
+        }
+    })
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我是vue实例中的数据"
+        },
+        methods: {
+            grandpa: function (data) {
+                alert("我是爷爷中的方法")
+
+            }
+        }
+    })
+</script>

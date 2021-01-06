@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+        <father></father>
+
+    </div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+        <p>{{msg}}</p>
+        <button @click="fatherfn">点击爸爸中按钮</button>
+        <son>
+            <!-- 接收子组件模板中插槽 暴露的数据 -->
+
+          
+            <!-- <template slot-scope="accceptmymsg">
+                    <div>我师追加的内容{{accceptmymsg.mymsg}}</div>
+            </template> -->
+
+              <!-- 通过v-slot:default 来对应匿名插槽  dafult对应匿名插槽 -->
+            <!-- <template v-slot:default="accceptmymsg">
+                    <div>我师追加的内容{{accceptmymsg.mymsg}}</div>
+            </template> -->
+
+             <!-- 通过v-slot:one 来对应 具名插槽  one对应具名插槽name属性值 -->
+            <template v-slot:one="accceptmymsg">
+                    <li v-for="(value,index) in accceptmymsg.mymsg">{{value}}</li>
+            </template>
+          
+            <!-- 插槽的作用:在父组件的模板中决定   在子组件模板中 如何渲染内容   -->
+        </son>
+    </div>
+</template>
+<template id="son">
+        <div>
+            <p>{{sonmsg}}</p>
+            <!-- 同v-bind 将子组件中的sonmsg数据 暴露 -->
+            <!-- <slot name="one" :mymsg="sonmsg">{{sonmsg}}</slot>
+            <slot name="two"></slot> -->
+
+            <slot :mymsg="sonmsg" name="one"></slot>
+            <button @click="fatherfn">点击儿子中按钮</button>
+          
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component("father", {
+        template: "#father",
+        data: function () {
+            return { msg: "我是爸爸中数据", }
+        },
+        methods: {
+            fatherfn: function () {
+                alert("我是爸爸中的方法")
+            }
+        },
+        components: {"son":{
+            template: "#son",
+            data: function () {
+                return { sonmsg: ["我是一","我是二","我是三","我是四"], }
+            },
+            methods: {
+                fatherfn: function () {
+                    alert("我是son中的方法")
+                }
+            },
+        }
+         
+        }
+    })
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "我是vue实例中的数据"
+        },
+        methods: {
+            grandpa: function (data) {
+                alert("我是爷爷中的方法")
+
+            }
+        }
+    })
+</script>

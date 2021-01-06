@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <father></father>
+    </div>
+</body>
+</html>
+<!-- 在子组件中使用父组件中的数据 -->
+<!-- 在父组件模板中中  v-bind:自定义接受名称 = "要传递的数据"  传递-->
+<!-- 在子组件中的定义对象中通过： props:["自定义接受名称"]  方式接受-->
+<!-- 在子组件模板中 通过{{自定义接受名称}}  使用父组件的数据-->
+<template id="father">
+        <div>
+            <button @click="fn">我是父组件按钮father</button>
+            <p>{{fathermsg}}</p>
+            <son v-bind:father-data="fathermsg"></son>
+        </div>
+    </template>
+    <template id="son">
+        <div>
+            <button @click="fn">我是父组件按钮son</button>
+            <p>{{fatherData}}</p>
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+        var vm = new Vue({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            fn: function () {
+                this.isShow = !this.isShow
+            }
+        },
+        components: {
+            "father": {
+                template: "#father",
+                data: function () {
+                    return {
+                        fathermsg: "我是局部自定义组件中的数据father", num: 100
+                    }
+                },
+                methods: {
+                    fn: function () {
+                        console.log(this)
+                    }
+                },
+                // 自定义局部子组件
+                components: {
+                    "son": {
+                        template: "#son",
+                        data: function () {
+                            return {
+                                msg: "我是局部自定义组件中的数据son", num: 100
+                            }
+                        },
+                        methods: {
+                            fn: function () {
+                                console.log(this)
+                            }
+                        },
+                        props:["fatherData"]
+                    }
+                }
+            }
+
+        }
+
+
+
+    })
+
+</script>

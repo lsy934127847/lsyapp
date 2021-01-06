@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      img{
+          width: 100px;
+          height: 100px;
+      }
+    </style>
+</head>
+<body>
+    <div id="app1">
+        <button @click="appFn">我时按钮</button>
+        <abc ></abc>
+        <def ></def>
+        <p>{{msg}}</p>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component("def",{
+        template:`
+            <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>全局组件def</p>
+                    <button @click="appbn">我是全局组件按钮</button>
+                    <p>{{msg}}</p>
+            </div>
+                `,
+                methods:{
+                    appbn:function(){
+                        alert("我是自定义全局组件中的方法")
+                    } 
+                },
+                //在自定义组件中也可以使用data，但使用data的数值值是一个函数，在函数中定义返回值{}，在对象中定义要使用的数据 
+                data:function(){
+                    return {
+                        msg:"我是自定义全局组件中的数据"
+                    }
+                }
+    })
+        var vm1 = new Vue({
+        el:"#app1",
+        data:{
+           msg:"vue实例中的数据"
+        },
+        methods:{
+            appFn:function(){
+                alert("appfn")
+            }
+        },
+        // 用于自定义局部组件 局部组件只能在注册时组件所在的vue实例中控制的区域使用
+        components:{
+            "abc":{
+                template:`
+            <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>局部组件#app1--abc</p>
+                    <button @click="appbn">我是局部组件按钮</button>
+            </div>
+                `,
+                methods:{
+                    appbn:function(){
+                    alert("我是自定义局部组件中的方法")
+                        
+                    }
+                }
+            }
+        }
+    })
+</script>

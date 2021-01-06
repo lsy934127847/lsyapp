@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" id="input">
+        <h1 id="msg"></h1>
+    </div>
+    <button id="btn">点击我</button>
+</body>
+</html>
+<script>
+    var app = {}
+    console.log(app)
+
+    var msg = 1
+   Object.defineProperty(app,'msg',{
+       get:function(){
+        console.log('get')
+           return  msg
+       },
+       set:function(arg){
+           console.log('set')
+           console.log(arg)
+           msg = arg
+           watch(arg)  //实现 数据 - 视图  的同步
+       }
+   })
+
+var obtn = document.getElementById('btn')
+
+obtn.onclick = function(){
+    app.msg = msg + 1
+   
+}
+function watch(value){
+    document.getElementById('input').value = value
+    document.getElementById('msg').innerHTML = value
+}
+
+//  监听input事件，实现视图 - 数据  的同步
+document.getElementById('input').addEventListener('input',function(e){
+    app.msg = e.target.value  //触发set 方法
+    console.log(msg)
+})
+
+</script>

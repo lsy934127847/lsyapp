@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <abc></abc>
+        <abc></abc>
+        <abc></abc>
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+   var res =   Vue.component("abc",{
+         template:`
+     <div>
+        <p>我是全局组件</p>
+        <button @click="fn">我是全局组件的按钮 累加</button>
+        <p>{{num}}</p>
+    </div>
+         `,
+         data:function(){
+             return {msg:"我是全局自定义组件中的数据",num:100}
+         },
+         methods:{
+             fn:function(){
+                //  console.log(this)
+                //  alert(this.msg)
+                this.num++
+             }
+         }
+     })
+     new Vue({
+         el:"#app",
+         data:{
+
+         }
+
+     })
+     console.dir(res)
+
+
+   
+</script>

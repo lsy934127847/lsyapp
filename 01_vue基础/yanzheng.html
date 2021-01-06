@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+
+
+   <li>
+       <li></li>
+   </li>
+<div>
+        <input type="text" v-model="msg">
+        <!-- <span>{{fn}}</span> -->
+</div>
+ 
+   <a href=""><a href=""></a></a>
+   <span><span></span></span>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:"div",
+        data:{
+            msg:25
+        },
+        computed:{
+            fn:function(){
+                var a=0
+                a= a+this.msg
+                console.log(a)
+                return 2
+            }
+        }
+    })
+</script>

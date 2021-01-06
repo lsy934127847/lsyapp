@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 3.使用组件 注意点:自定义组件需要在vue实例中才可以使用，全局自定义组件可以在任何vue实例中使用-->
+        <!-- 自定组件标签需要在vue控制的区域内使用，全局自定义组件标签可以在任何在任何vue控制的区域使用 -->
+        <!-- <abc></abc> -->
+        <!-- <def></def> -->
+        <!-- <abc></abc> -->
+        <aaa></aaa>
+        <bbb></bbb>
+    </div>
+
+</body>
+
+</html>
+
+<template id="info">
+        <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>你好</p>
+            </div>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script id="infoo" type="text/html">
+    <div>
+            <img src="./images/timg.jpg" alt="">
+                <p>你好</p>
+        </div>
+</script>
+
+<script>
+    // 1.创建全局组件构造器
+    var Profile = Vue.extend({
+        // 注意点:指定组件模板的时候，模板只能由一个根元素
+        template: ` 
+        <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>你好</p>
+            </div>
+                     `
+    })
+    // 2.注册已经创建好的组件
+    // 第一个参数：设置注册的组件的名称
+    // 第二个参数：传入已经创建好的组件构造器
+    Vue.component("abc", Profile)
+
+
+
+    // 二创建全局自定义组件的简写  方式一
+    Vue.component("def", {
+        template: ` 
+        <div>
+                <img src="./images/timg.jpg" alt="">
+                    <p>你好</p>
+            </div>
+            `
+    })
+//  方式二 创建全局自定义组件的简写  将组件模板写在script 标签中 将template的属性值设为script 标签的id选择器
+      Vue.component("aaa", {
+        template: "#infoo"
+    })
+
+//方式三   创建全局自定义组件的简写  将组件模板写在 template 标签中，将template的属性值设为template 标签的 id选择器
+       Vue.component("bbb", {
+        template: "#info"
+    })
+
+
+
+    var vm = new Vue({
+        el: "#app"
+    })
+
+
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 在定义组件名称的时候如果使用了驼峰命名 在使用时需要转换成""短横线分割命名",大写变成小写
+    // 定义时 myFather  使用时：my-father
+
+    // 在传递数据的时候  传递时 自定义属性名称 使用了短横线  接收时 必须使用驼峰命名  在子组件模板中使用接受的驼峰命名
+    // 传递时  :father-data   接收时：props:['fatherData']   使用时 {{fatherData}}
+
+
+    // 在传递方法的时候  传递时自定义属性名称 使用了短横线  接收和使用时 要保持一致   
+    // 传递时  @father-md   接收时 this.$emit("father-md")  使用时 {{father-md }}
+</script>

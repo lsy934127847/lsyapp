@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <father></father>
+    </div>
+</body>
+</html>
+<!-- 在子组件中使用父组件中的数据 -->
+<!-- 在父组件模板中中  v-bind:自定义接受名称 = "要传递的数据"  传递-->
+<!-- 在子组件中的定义对象中通过： props:["自定义接受名称"]  方式接受-->
+<!-- 在子组件模板中 通过{{自定义接受名称}}  使用父组件的数据-->
+
+
+<!-- 在子组件中使用父组件的方法 -->
+<!-- 1.在父组件模板中,在子组件中添加 v-on:自定义接受名称 = "要传递的方法" -->
+<!-- 2.在子组件定义的对象中，在mothods 添加一个方法fn ，在方法中添加 this.$emit("自定义接受名称") 代码-->
+<!-- 3.在子组件模板中，直接使用子组件对象中的方法即可  触发父组件对象中的方法 -->
+
+<!-- 组件命名注意点 -->
+<template id="father">
+        <div>
+            <button @click="fn">我是父组件按钮father</button>
+            <p>{{fathermsg}}</p>
+            <son v-on:fatherfn="fn" :father-data="fathermsg"></son>
+        </div>
+    </template>
+    <template id="son">
+        <div>
+            <button @click="sonfn">我是父组件按钮son</button>
+            <p>{{fatherData}}</p>
+        </div>
+    </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+        var vm = new Vue({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            fn: function () {
+                this.isShow = !this.isShow
+            }
+        },
+        components: {
+            "father": {
+                template: "#father",
+                data: function () {
+                    return {
+                        fathermsg: "我是局部自定义组件中的数据father", num: 100
+                    }
+                },
+                methods: {
+                    fn: function () {
+                        // console.log(this)
+                        alert("父组件的方法触发了")
+                    }
+                },
+                // 自定义局部子组件
+                components: {
+                    "son": {
+                        template: "#son",
+                        data: function () {
+                            return {
+                                msg: "我是局部自定义组件中的数据son", num: 100
+                            }
+                        },
+                        methods: {
+                            sonfn: function () {
+                                // console.log(this)
+                                this.$emit("fatherfn")
+                            }
+
+                        },
+                        // 接受父组件传递的数据
+                        props:["fatherData"],
+
+
+
+                    }
+                }
+            }
+
+        }
+
+
+
+    })
+
+</script>

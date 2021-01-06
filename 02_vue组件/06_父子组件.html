@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <father></father>
+        <globalfather></globalfather>
+       
+    </div>
+</body>
+
+</html>
+<template id="father">
+    <div>
+        <button @click="fn">我是父组件按钮father</button>
+        <p>{{msg}}</p>
+        <son></son>
+    </div>
+</template>
+<template id="son">
+    <div>
+        <button @click="fn">我是子按钮son</button>
+        <p>{{msg}}</p>
+    </div>
+</template>
+
+<template id="father-g">
+        <div>
+            <button @click="fn">我是父组件按钮father</button>
+            <p>{{msg}}</p>
+            <globalson></globalson>
+            
+        </div>
+    </template>
+    <template id="son-g">
+            <div>
+                <button @click="fn">我是子按钮son</button>
+                <p>{{msg}}</p>
+                
+            </div>
+        </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    // 自定义全局父子组件 注意点：自定义全局父子组件，子组件只能在 当前 的定义他的父组件的 模板中 使用
+    Vue.component("globalfather", {
+        template: "#father-g",
+        data: function () {
+            return {
+                msg: "我是自定义全局父组件的数据"
+            }
+        },
+        methods: {
+            fn: function () {
+                alert("是自定义全局父组件的方法")
+            }
+        },
+        components: {
+            "globalson": {
+                template: "#son-g",
+                data: function () {
+                    return {
+                        msg: "我是自定义全局子组件的数据"
+                    }
+                },
+                methods: {
+                    fn: function () {
+                        alert("是自定义全局子组件的方法")
+                    }
+                },
+            }
+        }
+    })
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            fn: function () {
+                this.isShow = !this.isShow
+            }
+        },
+        components: {
+            "father": {
+                template: "#father",
+                data: function () {
+                    return {
+                        msg: "我是局部自定义组件中的数据father", num: 100
+                    }
+                },
+                methods: {
+                    fn: function () {
+                        console.log(this)
+                    }
+                },
+                // 自定义局部子组件
+                components: {
+                    "son": {
+                        template: "#son",
+                        data: function () {
+                            return {
+                                msg: "我是局部自定义组件中的数据son", num: 100
+                            }
+                        },
+                        methods: {
+                            fn: function () {
+                                console.log(this)
+                            }
+                        },
+                    }
+                }
+            }
+
+        }
+
+
+
+    })
+
+</script>

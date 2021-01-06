@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 定义对象属性的方式（一）
+    var obj = {
+        name:'lsy',
+        age:25
+    }
+    // 删除 属性
+    delete obj.msg
+    // 定义对象属性的方式（二）
+    var obj2 = {}
+    var foo = 1
+    var age = 36
+    Object.defineProperty(obj2,'foo',{
+        //数据描述符
+        // value:'属性的值',
+        // writable:如果为true,属性的值可以被重写，默认为false
+        // enumerable:如果为true,属性可以在for..in.. 循环中遍历出来或者Object.keys获取到,默认false
+
+        // configurable:如果是false,除了value和writable[true变false]情况外，其他的改变都会报错，默认是false
+        // 访问器描述符
+        // get:funcition(){}
+        // set:funcition(){}
+        // 数据描述符和访问器描述符不能同时使用
+       //  writable:true, // 表示可修改属性值，默认false不可以修改
+       // enumerable:true,  // 表示对象可被枚举，默认false不可以枚举
+
+        value:12
+    })
+    obj2.foo = 14
+    console.log(obj2.foo)
+    console.log(Object.keys(obj2))
+
+      Object.defineProperty(obj2,'age',{
+           get:function(){
+               console.log('get')
+               return age;
+           },
+           set:function(arg){
+            console.log('set')
+               age = arg
+           }
+      })
+      console.log(obj2)
+      obj2.age = 34
+    //   console.log(obj2.age)
+</script>

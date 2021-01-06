@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+</head>
+
+<body>
+    <div id="app">
+        <div class="app-cart">
+            <div class="app-cart-item" v-for="(item,index) in goods" :key='item.id'>
+                <span>{{item.productName}}</span> &nbsp;
+                <span>{{item.price}}</span> &nbsp; &nbsp;
+                <button @click='add'>+</button> {{item.num}}
+                <button @click='sub'>-</button> &nbsp;
+                <span>{{item.price*item.num}}</span>
+            </div>
+            <h1>总价：{{totalPrice}}</h1>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        computed: {
+            totalPrice: function() {
+                let sum = 0;
+                this.goods.map((g, i) => {
+                    sum += g.mun * g.price;
+                })
+                return sum;
+            }
+        },
+        data: {
+            goods: [{
+                productName: "苹果",
+                num: 2,
+                price: 3,
+                id: 1,
+            }, {
+                productName: "梨",
+                num: 4,
+                price: 5,
+                id: 2,
+            }, {
+                productName: "香蕉",
+                num: 5,
+                price: 7,
+                id: 3,
+            }, ],
+        },
+        methods: {
+            add: function(index) {
+                console.log(index)
+                let newGoods = JSON.parse(JSON.stringify(this.goods)); // 深拷贝
+                console.log(newGoods[index])
+                    // newGoods[index].num += 1;
+                    // this.goods = newGoods;
+            },
+            sub: function(index) {
+                let newGoods = JSON.parse(JSON.stringify(this.goods)); // 深拷贝
+                // newGoods[index].num -= 1;
+                // this.goods = newGoods;
+            },
+        },
+    })
+</script>
+
+</html>
