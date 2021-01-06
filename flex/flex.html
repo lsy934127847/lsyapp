@@ -1,0 +1,95 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      #app{
+          width:400px;
+          height:400px;
+          /* background-color: red; */
+          display: flex;
+          /* flex-direction: column; */
+         justify-content: flex-end;
+          border: 1px solid red;
+          /* align-items: center; */
+          align-content: space-around;
+          flex-wrap: nowrap;
+      }
+    
+      .son{
+          height:50px;
+          background-color: rebeccapurple;
+          /* width:100%; */
+          width:50px;
+          float: left;
+        
+      }
+      .son2{
+          /* align-self: flex-end */
+       
+      }
+      .son4{
+          /* align-self: flex-end */
+      }
+      .son1{
+          /* align-self: flex-start */
+      }
+    </style>
+</head>
+<body>
+     <div id="app">
+         <div class="son son1">1</div>
+         <div class="son son2">2</div>
+         <div class="son">3</div>
+         <div class="son son4">4</div>
+     </div>
+</body>
+</html>
+<script>
+ 
+// 按照题目可知
+
+// 第0项  1
+// 第1项  1 1
+// 第2项  2  1
+// 第3项  12 11
+// 第4项  111221
+
+// 
+
+var str = '1'
+var arr = str.split('')
+var index = 1   // 标识相等判断次数
+var num = 0     // 标识递归次数，以终止递归，递归次数和传入的 传入的项数有关
+
+ function fn(n,arr){
+    var newArr = []
+    for(var i=0;i<arr.length;i++){
+        
+        if(arr[i] == arr[i+1]){
+            index ++
+        }else{
+           
+            newArr.push(index,arr[i])
+            index = 1
+        }
+    }
+    num++
+       if(num === n){
+           console.log(newArr)  
+            console.log(newArr.join(''))   //111221  正确
+           return newArr
+       }else{
+           fn(n,newArr)
+       }
+ }
+
+fn(4,arr)
+
+
+</script>
