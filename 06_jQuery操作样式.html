@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      div:nth-of-type(1){
+          width:600px;
+      }
+    </style>
+</head>
+<body>
+        <div></div>
+        <div style="width:200px;"></div>
+        <div style="width:300px;"></div>
+        <div style="width:400px;"></div>
+        <script src="./jquery.min.js"></script>
+</body>
+</html>
+<script>
+// 获取样式
+//  css("属性") 可获取行内,内嵌,外联的样式
+//  获取只能获取索引为0的元素的属性
+console.log($("div").css("width"))
+console.log($("div").next().css("width"))
+
+//   css('样式名称','样式值')
+//  设置行内样式,设置可以给全部元素设置
+console.log($("div").css("height",400))
+console.log($("div").css("width",600))
+console.log($("div").css("opacity",0.5))
+console.log($("div").css("background","green"))
+console.log($("div").css("marginTop",10))
+
+
+// css(对象)
+ $("div").css({
+     height:400,
+     width:400,
+     opacity:0.5,
+     background:"red",
+     marginTop:20
+    
+ })
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .box{
+          width:200px;
+          height: 200px;
+          background-color: red;
+          border: 10px solid palegreen;
+      }
+      #box2{
+          width:800px;
+          height: 40px;
+          background-color: blueviolet;
+         
+      }
+    </style>
+</head>
+<body>
+    <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+    <div class="box"></div>
+    <div id="box2"></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    $('button').eq(0).click(function(){
+        // $(".box").show([动画完成的时间],[运动曲线],[动画完成后执行fn])
+        // 第一个参数：可以填毫秒数，表示动画完成的时间，默认参数："fast""slow""normal"
+        // 第二个参数：运动曲线：匀速："linear",先慢后快在慢
+        // $(".box").show()
+    //    content 宽高在变化，最后直接display:none
+        $(".box").show(3000,"linear",function(){
+            alert("show动画执行完毕了")
+        })
+        
+    })
+    $('button').eq(1).click(function(){
+        // $(".box").hide([动画完成的时间],[运动曲线],[动画完成后执行fn])
+        // $(".box").hide()
+        $(".box").hide(3000,"linear",function(){
+            alert("hide动画执行完毕了")
+        })
+      
+    })
+    $('button').eq(2).click(function(){
+        // $(".box").toggle([动画完成的时间],[运动曲线],[动画完成后执行fn])
+        $(".box").toggle(2000,function(){
+            alert("切换完成了")
+        })
+    })
+</script>

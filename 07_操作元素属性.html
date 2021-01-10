@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       #nihao{
+           width:100px;
+           height: 100px;
+           background-color: red;
+       }
+
+    </style>
+</head>
+<body>
+        <div class="one" data-info-tel="123" aa="22"></div>
+        <input type="checkbox">
+        <button class="del">删除一个属性</button>
+        <button class="add">添加一个属性</button>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script> 
+ $(".add").click(function(){
+    //  attr("属性") 只有一个参数的时候表示获取
+    // 获取的是HTML自定义或者系统属性
+     console.log($("div").attr("aa"))
+    //  设置的也是HTML属性
+     $("div").attr("class","two")
+    //  设置自定义属性,会显示标签上,但不会显示在元素对象中
+     $("div").attr("index","234") 
+
+    // console.log($("div"))
+    //  console.dir($("div")[0])
+    //  console.log($("div").attr("index"))
+    // 只能获取系统属性
+    console.log( $("div").prop("aa"))
+    // 设置的自定义属性存储在元素对象里,不会显示在标签中
+    // 但设置的属性会起效果,即浏览器会进行渲染
+    $("div").prop("bb","333") 
+    $("div").prop("id","nihao") 
+    console.log($("div"))
+    console.dir($("div")[0])
+   
+ 
+ })
+ $(".del").click(function(){
+    //  移出自定义或系统属性
+    // $("div").removeAttr("class") 
+    // 无法删除原生系统属性,将其值赋值为了undefined
+    // 可以删除prop设置的自定义属性(在元素对象中)
+    $("div").removeProp("class") 
+    $("div").removeProp("aa") 
+    $("div").removeProp("bb") 
+    console.dir($("div")[0])
+ })
+//  设置id后 通过id选择器设置Css样式,没有起效果
+//  设置属性后既没有显示在标签中,也没有显示在元素对象和jQuery对象中
+//  设置的属性和元素没有任何关系
+ $("div").data("id","one")
+//  只能获取通过data设置的属性,其他任何属性都无法获得
+ console.log($("div").data("id"))
+ console.log($("div"))
+ console.dir($("div")[0])
+// 删除data设置的数据
+     $("div").removeData("id")
+     console.log($("div").data("id"))
+</script>

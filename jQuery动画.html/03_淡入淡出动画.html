@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:200px;
+            height: 200px;
+            background-color: red;
+            /* border: 10px solid palegreen; */
+        }
+        #box2{
+            width:800px;
+            height: 40px;
+            background-color: blueviolet;
+           
+        }
+      </style>
+</head>
+<body>
+    <button>淡入</button>
+    <button>淡出</button>
+    <button>切换</button>
+    <button>淡入到</button>
+    <div class="box"></div>
+    <div id="box2"></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    $('button').eq(0).click(function(){
+         //   opacity在变化0-1  display:block 
+        $(".box").fadeIn(2000,"linear",function(){
+            alert("淡入完毕")
+        })
+    })
+    $('button').eq(1).click(function(){
+        // display:block 淡出  opacity在变化1-0
+        $(".box").fadeOut(2000,"linear",function(){
+            alert("淡出完毕")
+        })
+    })
+    $('button').eq(2).click(function(){
+        $(".box").fadeToggle(2000,"linear",function(){
+            alert("切换完毕")
+        })
+    })
+    $('button').eq(3).click(function(){
+        $(".box").fadeTo(2000,0.2,"linear",function(){
+            alert("变化到到0.2完毕")
+        })
+    })
+</script>

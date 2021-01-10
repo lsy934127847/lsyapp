@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        #box{
+            width:400px;
+            margin: 100px auto;
+        }
+        ul li{
+            list-style: none;
+        }
+        .nav{
+            width:400px;
+            height:50px;
+            /* background-color: aqua */
+        }
+        .nav>li{
+            width:100px;
+            height:50px;
+            border-right: 1px solid red;
+            border-top: 1px solid red;
+            float: left;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            background-color: orangered;
+            cursor: pointer;
+        }
+        .content>li{
+            width:400px;
+            height:300px;
+            border: 1px solid red;
+            float: left;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 50px;
+            font-size: 40px;
+            line-height: 300px;
+            position: absolute;
+            background-color: chartreuse;
+            display: none;
+        }
+        .content{
+            position: relative;
+        }
+        .nav>.current{
+            background-color: blue;
+        }
+        .content>.current{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul class="nav">
+            <li style="border-left: 1px solid red;">选项卡一</li>
+            <li>选项卡二</li>
+            <li>选项卡三</li>
+            <li>选项卡四</li>
+        </ul>
+        <ul class="content">
+            <li class="current">内容一</li>
+            <li>内容二</li>
+            <li>内容三</li>
+            <li>内容四</li>
+        </ul>
+    </div>
+
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    // 移入变为蓝色
+    $(".nav>li").mouseenter(function(){
+        // 添加类名
+        $(this).addClass("current")
+        // 干掉所有非当前类名
+        $(this).siblings().removeClass("current")
+    })
+    $(".nav>li").click(function(){
+        // 添加类名
+       var index=$(this).index()
+    //    给当前添加类名
+        $(".content>li").eq(index).addClass("current")
+        // 干掉所有非当前类名
+        $(".content>li").eq(index).siblings().removeClass("current")
+    })
+</script>

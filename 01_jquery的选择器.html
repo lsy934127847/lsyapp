@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="a">1</li>
+        <li class="a">2</li>
+        <li class="b">3</li>
+        <li class="c">4</li>
+        <li id="aaa">5</li>
+        <li id="bbb">6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <ul>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+    </ul>
+</body>
+</html>
+<script src="./jquery.min.js">
+  
+</script>
+<script>
+  //  jQuery的选择器
+    // 获取dom元素的方式
+    //  $() jQuery()
+    // 获取的是一组元素
+    // 从返回值和返回值的类型分析
+    // jQuery的优点：
+    //  +无所不能的选择器
+    // 无处不在的隐式迭代
+    // 无与伦比的链式编程
+    // 解决绝大部分兼容问题
+    var $ul = $("ul")
+    //  获取页面中所有的ul标签
+    console.log($ul)
+ //  获取页面中所有的ul标签的下的后代li标签，相当于css后代选择器
+    var $li = $("ul li")
+    console.log($li)
+    // 获取页面种所有ul标签下的直接子元素li标签
+   console.log($("ul>li"))
+//   获取页面中所有ul标签的直接子元素的第一个li标签
+   console.log($("ul>li:nth-child(1)"))
+//   获取页面中所有ul标签的直接子元素的最后一个li标签
+console.log($("ul>li:last-child"))
+//  获取页面中id名称为aaa的标签
+console.log($("#aaa"))
+//  获取类名为a的标签
+console.log($(".a"))
+//  获取页面中所有ul标签下的第偶数个里标签
+console.log($("ul>li:nth-child(odd)"))
+//  获取页面中所有ul标签下的第奇数个里标签
+console.log($("ul>li:nth-child(even)"))
+//  获取页面中所有ul标签下的类名为。a的标签
+console.log($("ul>li.a"))
+
+// 以上写法和css选择器写法完全一致
+//  jQuery 通过$()返回的不是DOM节点，是一个jQuery对象，但是里面包含DOM节点
+//  需要把jQuery对象转换成DOM节点，才能进行DOM操作
+
+//  获取第一个ul 下的所有li标签
+var $li=$("ul:nth-child(1)>li")
+console.log($li[0])
+console.log($li.get(0))
+
+//  把DOM节点转换为jQuery对象
+console.log($($li[0]))
+</script>

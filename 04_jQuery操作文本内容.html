@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <span>hello 1</span>
+        </li>
+        <li>
+            <span>hello 2</span>
+        </li>
+    </ul>
+    <input type="text" value="hello world1">
+    <input type="text" value="hello world2">
+    <input type="text" value="hello world3">
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    // 获取找到的所有li元素里的  第一个li超文本内容
+    // 类似于inneHTML 
+    // 可以解析标签
+    // 不传递参数代表获取,传递参数代表设置
+    console.log($("li").html())
+    console.log($("li").html("<p>2333</p>"))
+
+    // text() 类似于innerText
+    // 不能解析文本
+    //不传递参数代表获取
+    // 传递参数代表设置
+    console.log($("li").text())
+    console.log($("li").text("<p>我是你爸爸</p>"))
+
+    // val()  类似value
+    console.log($("input").val())
+    console.log($("input").val("你的密码是多少"))
+</script>

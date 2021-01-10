@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>123456
+        <p>我是要删除的p节点</p>
+        <span>我是要删除的span节点</span>
+        <div>
+            <p>123456789</p>
+        </div>
+    </div>
+    <button>点击我啊</button>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    $('button').click(function(){
+        // 删除div中的所有子节点(包括文本，元素。。)
+//    $('div').empty()
+//  删除所有指定元素节点
+    //   $('p').remove()
+    })
+
+// 替换节点
+var $span=$('<span>我是要替换的span节点</span>')
+$('button').click(function(){
+    // 页面元素.replaceWith(要替换的元素)
+    // $('p').replaceWith($span)
+     // 要替换的元素.replaceWith(页面元素)
+    // $span.replaceAll($('p'))
+})
+   
+// 克隆节点
+// ==>接收两个参数
+//  -->clone(布尔值,布尔值)
+//  -->第一个参数:默认是false,表示是否克隆元素的事件
+//  -->第二个参数:默认是跟随第一个,表示是否克隆子节点的事件
+//  -->注意:当第一个参数为false的时候,第二个参数没有意义
+$('button').click(function(){
+  var $cloneDiv= $('body>div').clone()
+  $('button').after($cloneDiv)
+})
+
+
+</script>

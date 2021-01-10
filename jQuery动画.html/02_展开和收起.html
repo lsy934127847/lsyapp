@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:200px;
+            height: 200px;
+            background-color: red;
+            /* border: 10px solid palegreen; */
+        }
+        #box2{
+            width:800px;
+            height: 40px;
+            background-color: blueviolet;
+           
+        }
+      </style>
+</head>
+<body>
+    <button>展开</button>
+    <button>收起</button>
+    <button>切换</button>
+    <div class="box"></div>
+    <div id="box2"></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    $('button').eq(0).click(function(){
+       
+    //    高度在变化，展开完毕display:block  收起完毕：display:none
+        $(".box").slideDown(3000,"linear",function(){
+            alert("展开完毕")
+        })
+    })
+    $('button').eq(1).click(function(){
+        $(".box").slideUp(3000,"linear",function(){
+            alert("收起完毕")
+        })
+    })
+    $('button').eq(2).click(function(){
+        $(".box").slideToggle(3000,"linear",function(){
+            alert("切换完毕")
+        })
+    })
+</script>

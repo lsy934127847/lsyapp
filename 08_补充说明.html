@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" checked="">
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    $("input").prop("checked","true")
+    $("input").prop("id","one")
+
+    console.dir($("input")[0])
+
+
+    function has(arr,data){
+    for(var i=0;i<arr.length;i++){
+        if(data===arr[i]){
+            //continue和break;
+            //在此处,循环在函数中,return终止了函数执行,就是终止了循环
+            return true;
+        }
+    }
+    //如果函数能运行到此处,说明没有终止函数
+    return false;
+}
+function norepeat(arr){
+    var result = [];
+    for(var i=0;i<arr.length;i++){
+        if(!has(result,arr[i])){
+            //如果进入此处,说明arr[i]在result里面不存在,可以放进去
+            result.push(arr[i])
+        }
+    }
+    return result;
+}
+    var arr=  [{id:111},{id:222},{id:444}]
+var brr=[{id:111},{id:222},{id:333}]
+var arr1=[]
+
+for(var i=0;i<arr.length;i++){
+    for(var k=0;k<brr.length;k++){
+        if(arr[i].id==brr[k].id){
+            break;
+        }else if(k==brr.length-1){
+            arr1.push(arr[i])
+        }
+     
+    }
+}
+console.log(arr1)
+
+//  合并数组
+// for(var i=0;i<arr.length;i++){
+//     arr1.push(arr[i].id)
+// }
+// for(var j=0;j<brr.length;j++){
+//     arr1.push(brr[j].id)
+// }
+// console.log(arr1)
+//  数组去重
+// var res=norepeat(arr1)
+// console.log(res)
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+           position: fixed;
+           bottom:100px;
+           right:100px;
+           width:100px;
+           height:100px;
+           background-color: aqua;
+           cursor: pointer;
+           display: none;
+       }
+       p{
+           height: 2000px;
+       }
+    </style>
+</head>
+<body>
+    <p></p>
+    <div>
+        回到顶部
+    </div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+     $(window).scroll(function(){
+        //  jQuery对象上有一个scrollTop()方法，返回元素滚动的距离
+        // jQuery 将页面的滚动默认为了html元素
+         if( $('html').scrollTop()>=300){
+             $('div').fadeIn(2000)
+         }else{
+             $('div').fadeOut(2000)
+         }
+     })
+     $('div').click(function(){
+       $('html').animate({
+          scrollTop:0
+       })
+     })
+</script>

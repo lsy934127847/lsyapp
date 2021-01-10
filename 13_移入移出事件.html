@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #father{
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+    }
+    #son{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="father">
+        <div id="son"></div>
+    </div>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    // mouseover mouseout 的事件，子元素移入移出也会触发父元素的事件
+    //  mmouseenter  mouseleave   子元素移入移出不会触发父元素的事件
+    $("#father").mouseenter(function(){
+        console.log("father被移入了")
+    })
+    $("#son").mouseenter(function(){
+        console.log("son被移入了")
+    })
+</script>

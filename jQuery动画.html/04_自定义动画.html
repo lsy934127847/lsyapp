@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0
+        }
+        .box{
+            width:200px;
+            height: 200px;
+            background-color: red;
+            /* border: 10px solid palegreen; */
+            position: absolute;
+        }
+        #box2{
+            width:800px;
+            height: 40px;
+            background-color: blueviolet;
+           
+        }
+        .box1{
+            width:200px;
+            height: 200px;
+            background-color: green;
+            /* border: 10px solid palegreen; */
+            position: absolute;
+            top:250px;
+        }
+      </style>
+</head>
+<body>
+    <button>淡入自定义动画1</button>
+    <button>累加属性</button>
+    <button>关键字</button>
+    <button>淡入自定义动画4</button>
+    <div class="box"></div>
+    <div class="box1"></div>
+    <div id="box2"></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    // swing:缓动，先慢后快再慢 默认
+    $('button').eq(0).click(function(){
+           $(".box").animate({
+            //    width:1000
+            left:600
+           },4000,"linear",function(){
+               alert("自定义动画完成了")
+           })
+    })
+    $('button').eq(0).click(function(){
+        $(".box1").animate({
+            //    width:1000
+            left:600
+           },4000,"swing",function(){
+               alert("自定义动画完成了")
+           })
+    })
+    $('button').eq(1).click(function(){
+        $(".box1").animate({
+            //    width:1000
+            left:"+=100"
+           },2000,"swing",function(){
+               alert("自定义动画完成了")
+           })
+    })
+
+       $('button').eq(2).click(function(){
+        $(".box1").animate({
+            //    width:0,
+            //    width:"hide",
+               width:"toggle"
+            // left:"+=100"
+           },2000,"swing",function(){
+               alert("自定义动画完成了")
+           })
+    })
+</script>

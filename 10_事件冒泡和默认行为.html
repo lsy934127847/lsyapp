@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       *{
+           margin:0;
+           padding:0;
+       }
+       .father{
+           width:200px;
+           height: 200px;
+           background-color: red;
+       }
+       .son{
+           width: 100px;
+           height: 100px;
+           background-color: aqua;
+       }
+       
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <a href="http://www.baidu.com"><span>点击我啊</span></a>
+    <form action="http://www.baidu.com">
+        <input type="text">
+        <input type="submit" value="我是按钮" >
+    </form>
+   
+    <!-- button需要js绑定事件才能提交表单，如果不绑定事件，点击button是
+    不会进行任何操作的 -->
+    <!-- submit 点击submit 会自动提交表单 -->
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    $('.father').click(function(){
+        alert('father')
+     
+    })
+    $('.son').click(function(event){
+        alert('son')
+        // 阻止事件冒泡
+        // return false
+        //  event.stopPropagation()
+    })
+    $('a').click(function(event){
+        alert('我是a标签')
+        // 阻止默认行为
+        // return false
+        // event.preventDefault()
+    })
+    $("a>span").trigger("click")
+    // 自动触发事件
+    // trigger 方法会触发事件冒泡和默认行为
+    // 触发默认行为时： // 绑定本身，是无法触发本身的默认行为
+    // 需要给子元素绑定trigger方法才能触发，
+   
+    // triggerHandler 不会触发事件冒泡和默认行为
+    // $('.son').trigger('click')
+   
+    // $('.son').triggerHandler('click')
+
+    $("input[type='submit']").click(function(){
+        alert('我是input标签')
+    })
+    // 想要触发a标签的默认跳转行为，需要绑定到a元素的子元素上
+    // 若直接给a标签绑定trigger方法，则不会触发a标签的默认跳转行为
+    // $('a>span').trigger('click')
+    // $('input').trigger('click')
+    //   $('a').triggerHandler('click')
+</script>

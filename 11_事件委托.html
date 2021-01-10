@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+    </ul>
+    <button>我是按钮</button>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+   $('button').click(function(){
+       $('ul').append(' <li>我是新增的li</li>')
+   })
+//    jQuery会给所有找到的元素绑定事件
+//    $('ul>li').click(function(){
+//        console.log($(this).html())
+//    })
+
+//  事件委托，将li的click事件委托给ul监听
+//  只有点击li 才有用，ul里的非li元素时不起作用的
+   $('ul').delegate('li','click',function(){
+       console.log($(this).html())
+   })
+//    事件委托应用：当动态添加元素时，绑定事件时无法获取到动态
+//  添加的元素，想要给动态添加的元素也绑定事件，需要用到事件委托
+//  委托给已经存在的父级元素监听
+</script>

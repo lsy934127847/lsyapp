@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+           width:100px;
+           height:100px;
+           background-color: red;
+
+       }
+       .son{
+           width:20px;
+           height:20px;
+           background-color: aqua;
+       }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="son"></div>
+    </div>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+   $('div').click(function(e){
+     console.log('e.currentTarget')
+    //  e.currentTarget 绑定事件的元素
+     console.log(e.currentTarget)
+    //  触发事件最小目标元素
+     console.log(e.target)
+    //  return false   
+   })
+</script>

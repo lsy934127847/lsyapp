@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       *{
+           padding:0;
+           margin:0;
+       }
+       .father{
+           width:400px;
+           height:400px;
+           background-color: aqua;
+           border: 20px solid red;
+           position: relative;
+       }
+       .son{
+           width:200px;
+           height:200px;
+           background-color: blue;
+           /* margin:20px auto; */
+           margin-left:100px;
+           border: 10px solid #000;
+           position: absolute;
+           left:40px;
+           top:40px;
+       }
+       li{
+           float: left;
+           list-style: none;
+       }
+       span{
+           padding:0 20px 0 20px;
+       }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <ul>
+        <li>我是<span>/</span></li>
+        <li>我是<span>/</span></li>
+        <li>我是<span>/</span></li>
+        <li>我是<span>/</span></li>
+        <li>我是<span>/</span></li>
+        <li>我是<span>/</span></li>
+    </ul>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+//   获取元素距离窗口的偏移位,以border为边界计算
+//  返回值是一个对象
+console.log($('.son').offset())
+console.log($('.son').offset().left)
+//  可以读取，可以设置
+console.log($('.son').offset({
+    left:600
+}))
+
+//  获取元素相对于定位父级的位置关系,绝对定位时是以margin为边界计算的
+//  只能读取，不能设置
+console.log($('.son').position())
+console.log($('.son').position().top)
+</script>

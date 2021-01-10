@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <button class="add">添加类名</button>
+        <button class="del">删除类名</button>
+        <button class="toggle">切换类名</button>
+        <button class="has">判断有没有box类名</button>
+          <div class="a b c d e f g"></div>
+    <div></div>
+    <div class="box"></div>
+    <div class="container"></div>
+    <div></div>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    //  addClass("box")表示给元素添加类名
+    // 如果有名为box的类名则不在添加
+  $(".add").click(function(){
+      $("div").addClass("box")
+  })
+//   removeClass("box") => 删除类名
+  $(".del").click(function(){
+      $("div").removeClass("box")
+  })
+//  toggleClass("box") => 切换类名
+//  本身有box的类名就删除,本身没有就添加
+ $(".toggle").click(function(){
+     $("div").toggleClass("box")
+ })
+//  hasClass("box") => 判断有没有一个类名
+// 判断所所获取的元素中是否是 box类名
+console.log($("div").hasClass("box"))
+
+</script>

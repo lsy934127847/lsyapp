@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+            width: 400px;
+            height: 400px;
+            padding:50px;
+            border:10px solid red;
+            margin:100px;
+            /* box-sizing: border-box; */
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+    // $('div').width() 获取元素content部分的宽度
+    console.log($('div').width())
+    // $('div').innerWidth() content+padding
+    console.log($('div').innerWidth())
+     // $('div').outerWidth() content+padding+border
+    console.log($('div').outerWidth())
+    // $('div').outerWidth(true) content+padding+border+margin
+    console.log($('div').outerWidth(true))
+</script>

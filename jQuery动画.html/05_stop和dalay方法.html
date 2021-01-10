@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            *{
+                padding:0;
+                margin:0
+            }
+            .box{
+                width:200px;
+                height: 200px;
+                background-color: red;
+                /* border: 10px solid palegreen; */
+                position: absolute;
+            }
+            #box2{
+                width:800px;
+                height: 40px;
+                background-color: blueviolet;
+               
+            }
+            .box1{
+                width:200px;
+                height: 200px;
+                background-color: green;
+                /* border: 10px solid palegreen; */
+                position: absolute;
+                top:250px;
+            }
+          </style>
+</head>
+<body>
+        <button>自定义动画1</button>
+        <button>停止动画</button>
+        <button>自定义动画1</button>
+        <button>自定义动画1</button>
+        <div class="box"></div>
+        <div class="box1"></div>
+        <div id="box2"></div>
+</body>
+</html>
+<script src="../jquery.min.js"></script>
+<script>
+   $("button").eq(0).click(function(){
+   // 在对象中书写多个属性，会同时变化
+//    依次书写动画，会依次执行，第一个动画完成后，才能进行第二个动画
+        $(".box").animate({
+         
+            width:600,
+            // height:600
+        },2000,function(){
+            // alert("动画完成了")
+            // delay等两秒执行下一个动画
+        }).delay(2000)
+        $(".box").animate({
+          
+            // width:600,
+            height:600
+        },2000,function(){
+            alert("动画完成了")
+        })
+   })
+   $("button").eq(1).click(function(){
+    //    立即停止当前动画，继续执行后续动画
+    $(".box").stop()
+    })
+    $("button").eq(2).click(function(){
+       
+    })
+</script>

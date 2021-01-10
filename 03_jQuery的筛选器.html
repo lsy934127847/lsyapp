@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <div></div>
+            <li class="a">1</li>
+            <li class="a">2</li>
+            <li class="b">3</li>
+            <li class="c">4</li>
+            <li id="aaa">5</li>
+            <li id="bbb">6</li>
+            <li class="abc">7</li>
+            <li class="abc">8</li>
+            <li class="abc" id="qqq">9</li>
+    </ul>
+</body>
+</html>
+<script src="./jquery.min.js"></script>
+<script>
+    console.log($("li").first())
+    console.log($("li").last())
+    
+//  ==>筛选集合里面的索引是n的那一个
+    console.log($("li").eq(3))
+    // next()筛选出下一个兄弟元素
+    var current=$("li").eq(3)
+    console.log(current)
+    console.log(current.next())
+    // nextAll()
+    // ()中什么都不写，表示筛选出元素后面的所有兄弟
+    console.log(current.nextAll())
+    // nextAll("选择器")，表示筛选出元素的后面的所有符合选择器的兄弟
+    console.log(current.nextAll(".abc"))
+    // nextUntil('选择器') 表示筛选出元素的后面的兄弟元素
+    // 不包括自身，也不包括第一个符合条件的元素
+    console.log(current.nextUntil(".abc"))
+
+    // prev()同上
+    console.log(current.prev())
+    console.log(current.prevAll())
+    console.log(current.prevAll(".a"))
+    console.log(current.prevUntil(".a"))
+
+    // parent()同上
+    console.log(current.parent())
+    console.log(current.parents())
+    console.log(current.parents("ul"))
+    console.log(current.parentsUntil("html"))
+
+    // children()()括号中什么都不写表示筛选出所有的直接子级元素
+    // children('选择器')表示筛选出符合条件的直接子级元素
+    console.log($("body").children())
+    console.log($("body").children("ul"))
+
+    // find('选择器')筛选出符合条件的后代元素
+
+    console.log($("body").find("li"))
+
+    // siblings()筛选出所有的兄弟元素
+    // 自己不算，
+    // siblings('选择器')筛选出所有的符合条件的兄弟元素
+    console.log($(current).siblings())
+    console.log($(current).siblings(".a"))
+
+    // index(),表示某元素是其父元素下的第几个元素
+    // ==>获取元素的索引位置
+    //不是元素集合里面的第几个
+    //找到他是该父元素下的第几个元素
+    //拿到的是一个数字
+    console.log(current.index())
+</script>
